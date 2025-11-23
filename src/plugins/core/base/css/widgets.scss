@@ -91,7 +91,7 @@
   }
 }
 
-.editor {
+.zenmark-editor {
   --editor-default-bg-color: var(--main-content-bg-color);
   // --color-bg-editor: var(--default-bg-color);
   // --color-bg-editor-header: var(--secondary-bg-color);
@@ -101,15 +101,19 @@
   --color-bg-editor-inner: var(--editor-default-bg-color);
   --color-text-editor: var(--main-content-text-color);
 
-  .editor-inner {
+  .zenmark-editor-middle {
+    padding-top: 0 !important;
+  }
+  
+  .zenmark-editor-inner {
     box-shadow: none !important;
     max-width: 100% !important;
-    .editor-content-extra-left,
-    .editor-content-extra-right {
+    .zenmark-editor-content-extra-left,
+    .zenmark-editor-content-extra-right {
       // width: 2rem !important;
       flex-shrink: 0;
     }
-    .editor-content {
+    .zenmark-editor-content {
       max-width: 100% !important;
       padding-top: 0rem !important;
       p::selection,

@@ -1,8 +1,7 @@
 import { useDocument } from "@/hooks/use-document";
-import { css } from "@emotion/css";
+import { Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Loader2 } from "lucide-react";
 import {
   KeyCode,
   KeyMod,
@@ -85,11 +84,6 @@ export const ZenmarkEditorComponent = (props: { uri: string }) => {
     <div
       ref={editorRef}
       style={{ height: "100%" }}
-      className={css`
-        .editor-middle {
-          padding-top: 0 !important;
-        }
-      `}
     >
       <ZenmarkEditor
         value={content}
