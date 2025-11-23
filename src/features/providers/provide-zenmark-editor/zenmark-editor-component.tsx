@@ -2,6 +2,7 @@ import { useDocument } from "@/hooks/use-document";
 import { css } from "@emotion/css";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Loader2 } from "lucide-react";
 import {
   KeyCode,
   KeyMod,
@@ -42,7 +43,21 @@ export const ZenmarkEditorComponent = (props: { uri: string }) => {
   }, [flush]);
 
   if (loading) {
-    return <div>{t("zenmark.loading")}</div>;
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-0 h-full">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground/70" />
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-sm font-medium text-foreground/90">
+              {t("zenmark.loading")}
+            </p>
+            <p className="text-xs text-muted-foreground/60 truncate max-w-xs">
+              {uri.split("/").pop()}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const handleKeyDown = (event: {
