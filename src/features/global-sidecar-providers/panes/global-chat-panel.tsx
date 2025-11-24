@@ -143,10 +143,17 @@ export const GlobalChatPanel = () => {
                 const contentText = extractTextFromUIMessage(msg);
                 const hasContent = contentText.trim().length > 0;
                 const isAssistant = msg.role === "assistant";
+                const hasTools =
+                  (msg.parts || []).some(
+                    (part) => (part as any).type === "tool-invocation"
+                  );
                 const isLastAssistant =
                   isAssistant && msg.id === lastAssistantId;
                 const showTyping =
-                  isLastAssistant && isAgentResponding && !hasContent;
+                  isLastAssistant &&
+                  isAgentResponding &&
+                  !hasContent &&
+                  !hasTools;
 
                 return (
                   <div

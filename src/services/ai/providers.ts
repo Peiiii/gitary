@@ -1,15 +1,14 @@
+import type { OpenAIChatChunk } from "@agent-labs/agent-toolkit";
 import OpenAI from "openai";
 import type {
   ChatCompletionMessageParam,
   ChatCompletionMessageToolCall,
 } from "openai/resources/chat/completions";
 import type {
-  AIMessage,
   AIGatewayRequest,
   AIGatewayResponse,
-  AIRole,
+  AIMessage
 } from "./types";
-import type { OpenAIChatChunk } from "@agent-labs/agent-toolkit";
 
 export type AIProviderName =
   | "openai"

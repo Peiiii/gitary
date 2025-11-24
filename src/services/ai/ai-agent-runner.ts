@@ -28,7 +28,9 @@ class AIGatewayAgent implements IAgent {
     const messageId =
       input.runId || input.threadId || `agent-${Date.now().toString(36)}`;
 
-    const aiMessages = buildAIMessagesFromUI(input.messages, input.context);
+    const aiMessages = truncateMessagesByChars(
+      buildAIMessagesFromUI(input.messages, input.context)
+    );
     const toolDefs = buildToolDefs(input.tools);
 
     return new Observable<AgentEvent>((subscriber) => {
@@ -132,6 +134,75 @@ function buildAIMessagesFromUI(
   }
 
   return msgs;
+}
+
+// Rough character-level trimming to avoid sending overly large prompts.
+// This is a safeguard on top of provider-side limits; it keeps the most
+// recent non-system messages while always preserving system prompts.
+const MAX_TOTAL_CONTENT_CHARS = 30_000;
+const MAX_PER_MESSAGE_CHARS = 10_000;
+
+function truncateMessagesByChars(
+  messages: AIMessage[],
+  maxTotalChars: number = MAX_TOTAL_CONTENT_CHARS
+): AIMessage[] {
+  if (!messages.length) return messages;
+
+  const systemMessages = messages.filter((m) => m.role === "system");
+  const otherMessages = messages.filter((m) => m.role !== "system");
+
+  const clampContent = (content: string, limit: number): string =>
+    content.length > limit ? content.slice(0, limit) : content;
+
+  let remaining = maxTotalChars;
+  const result: AIMessage[] = [];
+
+  const pushWithClamp = (msg: AIMessage): void => {
+    if (remaining <= 0) return;
+    const original = msg.content ?? "";
+    if (!original) return;
+
+    let content = clampContent(original, MAX_PER_MESSAGE_CHARS);
+    if (content.length > remaining) {
+      // Keep the tail part when we are close to the limit; the latest
+      // portion of a long message is usually more relevant.
+      content = content.slice(content.length - remaining);
+    }
+
+    if (!content.length) return;
+    remaining -= content.length;
+    result.push({ ...msg, content });
+  };
+
+  // 1) Preserve all system messages (in order), clamped per message.
+  for (const msg of systemMessages) {
+    pushWithClamp(msg);
+    if (remaining <= 0) {
+      return result;
+    }
+  }
+
+  // 2) Add non-system messages from most recent backwards.
+  const preserved: AIMessage[] = [];
+  for (let i = otherMessages.length - 1; i >= 0 && remaining > 0; i--) {
+    const msg = otherMessages[i];
+    const original = msg.content ?? "";
+    if (!original) continue;
+
+    let content = clampContent(original, MAX_PER_MESSAGE_CHARS);
+    if (content.length > remaining) {
+      content = content.slice(content.length - remaining);
+    }
+    if (!content.length) continue;
+
+    remaining -= content.length;
+    preserved.push({ ...msg, content });
+  }
+
+  // Messages were collected from latest to oldest; restore chronological order.
+  preserved.reverse();
+  result.push(...preserved);
+  return result;
 }
 
 function buildToolDefs(
