@@ -38,7 +38,8 @@ export default function SettingsShortcut({ shortcut, isExpanded }: SettingsShort
   }, [colorMode]);
   const { icon = "AiOutlineSetting", name } = shortcut;
   const displayName = name || t("common.settings");
-  const IconComponent = componentService.useComponent(icon);
+  const IconComponent =
+    componentService.useComponent(icon) ?? (() => null);
 
   const baseItem = (
     <BaseActivityItem

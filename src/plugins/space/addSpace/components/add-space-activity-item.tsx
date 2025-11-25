@@ -14,7 +14,8 @@ export const AddSpaceActivityItem = ({
   isExpanded,
 }: AddSpaceActivityItemProps) => {
   const { icon = "AiOutlinePlusCircle", name } = activity;
-  const IconComponent = componentService.useComponent(icon);
+  const IconComponent =
+    componentService.useComponent(icon) ?? (() => null);
 
   const ButtonEl = (
     <button

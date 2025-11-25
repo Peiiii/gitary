@@ -12,4 +12,5 @@ export type FolderTreeNode = {
   content?: string;
   type?: "file" | "dir";
   path?: string;
+  loading?: boolean;
 };

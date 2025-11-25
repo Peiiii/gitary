@@ -43,9 +43,9 @@ export const createDataStore = <T extends { [k: string]: any }>({
     data: T[];
     rehydrated: boolean;
     init: (items: T[]) => void;
-    upsert: (record: T) => void;
+    upsert: (record: any) => void;
     reduce: (fn: (data: T[]) => T[]) => void;
-    update: (record: Partial<T>) => void;
+    update: (record: any) => void;
     clear: () => void;
     add: (record: T) => void;
     delete: (id: string) => void;
@@ -187,7 +187,7 @@ export const createDataStore = <T extends { [k: string]: any }>({
         store.getState().init(items);
         notifyObservers({ type: `${name}/init`, payload: items as any });
       },
-      upsert: (record: T) => {
+      upsert: (record: any) => {
         store.getState().upsert(record);
         notifyObservers({ type: `${name}/upsert`, payload: record });
       },
@@ -195,7 +195,7 @@ export const createDataStore = <T extends { [k: string]: any }>({
         store.getState().reduce(fn);
         notifyObservers({ type: `${name}/reduce`, payload: fn as any });
       },
-      update: (record: Partial<T>) => {
+      update: (record: any) => {
         store.getState().update(record);
         notifyObservers({ type: `${name}/update`, payload: record as any });
       },

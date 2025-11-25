@@ -114,9 +114,9 @@ function SidebarItem({
   isActive = false,
   onClick,
 }: SidebarItemProps) {
-  const IconComponent = componentService.useComponent(
-    icon || "AiOutlineQuestionCircle"
-  );
+  const IconComponent =
+    componentService.useComponent(icon || "AiOutlineQuestionCircle") ??
+    (() => null);
 
   return (
     <BaseActivityItem
