@@ -5,6 +5,9 @@ import { GlobalChatPanel } from "./panes/global-chat-panel";
 import { AIAssistantIcon, ExcalidrawAIIcon } from "@/components/icons/ai-assistant-icon";
 import { ExcalidrawPaneBridge } from "./panes/excalidraw-pane-bridge";
 
+// Feature flag: 暂时关闭 Excalidraw AI 的入口
+const ENABLE_EXCALIDRAW_AI = false;
+
 let panesInitialized = false;
 
 const ensurePanes = () => {
@@ -17,14 +20,16 @@ const ensurePanes = () => {
     order: 1,
     component: GlobalChatPanel,
   });
-  registerGlobalSidecarPane({
-    id: "excalidraw-agent",
-    title: "Excalidraw AI",
-    description: "生成图表并写回画布",
-    icon: ExcalidrawAIIcon,
-    order: 2,
-    component: ExcalidrawPaneBridge,
-  });
+  if (ENABLE_EXCALIDRAW_AI) {
+    registerGlobalSidecarPane({
+      id: "excalidraw-agent",
+      title: "Excalidraw AI",
+      description: "生成图表并写回画布",
+      icon: ExcalidrawAIIcon,
+      order: 2,
+      component: ExcalidrawPaneBridge,
+    });
+  }
   panesInitialized = true;
 };
 

@@ -12,6 +12,9 @@ import { useGlobalSidecar } from "@/features/global-sidecar-providers";
 import { excalidrawAIService } from "@/services/ai/excalidraw-ai.service";
 import { ExcalidrawAIIcon } from "@/components/icons/ai-assistant-icon";
 
+// Feature flag: 暂时隐藏 Excalidraw AI 入口
+const ENABLE_EXCALIDRAW_AI = false;
+
 type ExcalidrawElement = NonNullable<
   ExcalidrawInitialDataState["elements"]
 >[number];
@@ -305,16 +308,18 @@ export function ExcalidrawAICanvas({
               aiEnabled={false}
             />
           </div>
-          <div className="absolute top-1/2 -translate-y-1/2 right-4 z-10">
-            <Button
-              onClick={openExcalidrawAssistant}
-              size="icon"
-              className="h-11 w-11 rounded-full bg-background/90 backdrop-blur-sm border border-border/40 text-foreground hover:bg-background shadow-lg"
-              title={t("excalidraw.aiAssistant") || "AI 绘图助手"}
-            >
-              <ExcalidrawAIIcon className="h-5 w-5" />
-            </Button>
-          </div>
+          {ENABLE_EXCALIDRAW_AI && (
+            <div className="absolute top-1/2 -translate-y-1/2 right-4 z-10">
+              <Button
+                onClick={openExcalidrawAssistant}
+                size="icon"
+                className="h-11 w-11 rounded-full bg-background/90 backdrop-blur-sm border border-border/40 text-foreground hover:bg-background shadow-lg"
+                title={t("excalidraw.aiAssistant") || "AI 绘图助手"}
+              >
+                <ExcalidrawAIIcon className="h-5 w-5" />
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

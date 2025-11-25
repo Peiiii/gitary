@@ -15,11 +15,46 @@ const SIDEBAR_ANIMATION_DURATION = 200;
 const CONTENT_FADE_DURATION = 150;
 const CONTENT_DELAY_OFFSET = -50;
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    // Initial value
+    setIsMobile(mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    // Fallback for older browsers
+    if (typeof mediaQuery.addListener === "function") {
+      mediaQuery.addListener(handleChange);
+      return () => mediaQuery.removeListener(handleChange);
+    }
+
+    return;
+  }, []);
+
+  return isMobile;
+}
+
 export const GlobalSidecarProvider = ({
   children,
 }: {
   children: ReactNode;
 }) => {
+  const isMobile = useIsMobile();
   const [panes, setPanes] = useState<Map<string, GlobalSidecarPaneDefinition>>(
     () => getRegisteredGlobalSidecarPanes()
   );
@@ -107,93 +142,149 @@ export const GlobalSidecarProvider = ({
 
   return (
     <GlobalSidecarContext.Provider value={ctxValue}>
-      <div className="flex h-full w-full overflow-hidden">
+      <div className="flex h-full w-full overflow-hidden relative">
         <div className="flex-1 min-w-0">{children}</div>
         {orderedPanes.length > 0 && (
-          <div
-            className="flex h-full bg-background/95 backdrop-blur-sm relative z-50"
-            style={
-              {
-                "--global-ai-sidebar-width": `${PANEL_WIDTH}px`,
-              } as CSSProperties
-            }
-          >
-            <div
-              className={cn(
-                "transition-[width] ease-in-out overflow-hidden flex flex-col bg-background border-l border-border/40",
-                open && activePane ? "w-[--global-ai-sidebar-width]" : "w-0"
-              )}
-              style={{
-                transitionDuration: `${SIDEBAR_ANIMATION_DURATION}ms`
-              }}
-            >
-              {open && activePane && ActiveComponent ? (
-                <div 
+          <>
+            {isMobile && (
+              <div className="fixed bottom-4 right-4 z-40 flex flex-col items-center gap-3">
+                {orderedPanes.map((pane) => {
+                  const Icon = pane.icon ?? MessageCircle;
+                  const active = pane.id === activePaneId && open;
+                  return (
+                    <button
+                      key={pane.id}
+                      onClick={() => {
+                        if (active) {
+                          closePane();
+                        } else {
+                          openPane(pane.id);
+                        }
+                      }}
+                      className={cn(
+                        "group flex h-11 w-11 items-center justify-center rounded-full shadow-md border bg-background/95 backdrop-blur-sm transition-all",
+                        active
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                      )}
+                      title={pane.title}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            {(!isMobile || (isMobile && open)) && (
+              <div
+                className={cn(
+                  "bg-background/95 backdrop-blur-sm z-50",
+                  isMobile ? "fixed inset-0 flex justify-end" : "flex h-full relative"
+                )}
+                style={
+                  {
+                    "--global-ai-sidebar-width": `clamp(280px, 80vw, ${PANEL_WIDTH}px)`,
+                  } as CSSProperties
+                }
+              >
+                {isMobile && open && (
+                  <div
+                    className="absolute inset-0 bg-black/40 z-0"
+                    onClick={closePane}
+                  />
+                )}
+                <div
                   className={cn(
-                    "h-full flex flex-col transition-opacity",
-                    contentVisible ? "opacity-100" : "opacity-0"
+                    "overflow-hidden flex flex-col bg-background border-l border-border/40 transition-all ease-in-out relative z-10",
+                    isMobile
+                      ? open && activePane
+                        ? "w-full max-w-[480px] h-full translate-x-0"
+                        : "w-0 h-full translate-x-full"
+                      : open && activePane
+                        ? "w-[--global-ai-sidebar-width]"
+                        : "w-0"
                   )}
                   style={{
-                    transitionDuration: `${CONTENT_FADE_DURATION}ms`
+                    transitionDuration: `${SIDEBAR_ANIMATION_DURATION}ms`,
                   }}
                 >
-                  <div className="flex items-center justify-between px-4 py-3 bg-background/80 backdrop-blur-md sticky top-0 z-10 border-b border-border/40">
-                    <div className="flex items-center gap-2.5">
-                      {activePane.icon && (
-                        <div className="w-5 h-5">
-                          <activePane.icon className="w-full h-full" />
-                        </div>
+                  {open && activePane && ActiveComponent ? (
+                    <div
+                      className={cn(
+                        "h-full flex flex-col transition-opacity",
+                        contentVisible ? "opacity-100" : "opacity-0"
                       )}
-                      <p className="text-sm font-medium text-foreground/90 tracking-tight">
-                        {activePane.title}
-                      </p>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      onClick={closePane} 
-                      className="h-6 w-6 rounded-full hover:bg-muted/50 text-muted-foreground transition-colors"
+                      style={{
+                        transitionDuration: `${CONTENT_FADE_DURATION}ms`,
+                      }}
                     >
-                      ×
-                    </Button>
-                  </div>
-                  <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
-                    <ActiveComponent
-                      {...activePaneProps}
-                      closePane={closePane}
-                    />
-                  </div>
+                      <div className="flex items-center justify-between px-4 py-3 bg-background/80 backdrop-blur-md sticky top-0 z-10 border-b border-border/40">
+                        <div className="flex items-center gap-2.5">
+                          {activePane.icon && (
+                            <div className="w-5 h-5">
+                              <activePane.icon className="w-full h-full" />
+                            </div>
+                          )}
+                          <p className="text-sm font-medium text-foreground/90 tracking-tight">
+                            {activePane.title}
+                          </p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={closePane}
+                          className="h-6 w-6 rounded-full hover:bg-muted/50 text-muted-foreground transition-colors"
+                        >
+                          ×
+                        </Button>
+                      </div>
+                      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+                        <ActiveComponent
+                          {...activePaneProps}
+                          closePane={closePane}
+                        />
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
-            </div>
-            <div className="w-[52px] flex flex-col items-center py-6 gap-4 border-l border-border/40 bg-background/50 backdrop-blur-sm">
-              {orderedPanes.map((pane) => {
-                const Icon = pane.icon ?? MessageCircle;
-                const active = pane.id === activePaneId && open;
-                return (
-                  <button
-                    key={pane.id}
-                    onClick={() => {
-                      if (active) {
-                        closePane();
-                      } else {
-                        openPane(pane.id);
-                      }
-                    }}
-                    className={cn(
-                      "group relative flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 ease-out",
-                      active
-                        ? "bg-muted text-foreground"
-                        : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-                    )}
-                    title={pane.title}
-                  >
-                    <Icon className={cn("h-5 w-5 transition-transform duration-200", active ? "scale-100" : "group-hover:scale-110")} />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+
+                {!isMobile && (
+                  <div className="w-[52px] flex flex-col items-center py-6 gap-4 border-l border-border/40 bg-background/50 backdrop-blur-sm">
+                    {orderedPanes.map((pane) => {
+                      const Icon = pane.icon ?? MessageCircle;
+                      const active = pane.id === activePaneId && open;
+                      return (
+                        <button
+                          key={pane.id}
+                          onClick={() => {
+                            if (active) {
+                              closePane();
+                            } else {
+                              openPane(pane.id);
+                            }
+                          }}
+                          className={cn(
+                            "group relative flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 ease-out",
+                            active
+                              ? "bg-muted text-foreground"
+                              : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                          )}
+                          title={pane.title}
+                        >
+                          <Icon
+                            className={cn(
+                              "h-5 w-5 transition-transform duration-200",
+                              active ? "scale-100" : "group-hover:scale-110"
+                            )}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </>
         )}
       </div>
     </GlobalSidecarContext.Provider>
