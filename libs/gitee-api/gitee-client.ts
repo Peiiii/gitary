@@ -91,6 +91,12 @@ export const getUrlParam = (name: string) => {
   return urlParams.get(name);
 };
 const URLBuilder = (() => {
+  const encodePath = (path: string) =>
+    path
+      .split("/")
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
+
   const getUserInfo = () => `${API_BASE_URL}/user`;
   const getBranchList = (owner, repo) =>
     `${API_BASE_URL}/repos/${owner}/${repo}/branches`;
@@ -99,13 +105,13 @@ const URLBuilder = (() => {
   const getBranch = (owner, repo, branch) =>
     `${API_BASE_URL}/repos/${owner}/${repo}/branches/${branch}`;
   const getPathContents = (owner, repo, path) =>
-    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${path}`;
+    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${encodePath(path)}`;
   const createFile = (owner, repo, path) =>
-    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${path}`;
+    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${encodePath(path)}`;
   const updateFile = (owner, repo, path) =>
-    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${path}`;
+    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${encodePath(path)}`;
   const deleteFile = (owner, repo, path) =>
-    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${path}`;
+    `${API_BASE_URL}/repos/${owner}/${repo}/contents/${encodePath(path)}`;
   const getRepo = (owner, repo) => `${API_BASE_URL}/repos/${owner}/${repo}`;
   const deleteRepo = (owner, repo) => `${API_BASE_URL}/repos/${owner}/${repo}`;
   const clearRepo = (owner, repo) =>
@@ -296,9 +302,23 @@ export const createGiteeClient = ({
     },
     get: async ({ owner, repo, path }) => {
       const r = await getPathInfo({ owner, repo, path });
-      r.data.rawContent = r.data.content;
-      r.data.uint8array = Base64.toUint8Array(r.data.rawContent);
-      r.data.content = Base64.decode(r.data.rawContent);
+      const data: any = r.data;
+
+      // When requesting a directory, Gitee returns an array without a content field.
+      // Return the raw data and let the caller handle the error or processing.
+      if (!data || Array.isArray(data)) {
+        return r as any;
+      }
+
+      // Some edge cases may not have a content field (e.g., empty files).
+      // Avoid passing undefined to Base64.decode / toUint8Array.
+      if (typeof data.content !== "string") {
+        return r as any;
+      }
+
+      data.rawContent = data.content;
+      data.uint8array = Base64.toUint8Array(data.rawContent);
+      data.content = Base64.decode(data.rawContent);
       return r as any;
     },
     getInfo: getPathInfo as any,
