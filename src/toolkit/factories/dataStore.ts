@@ -6,9 +6,15 @@ import { batch } from "react-redux";
 import type { Transform } from "redux-persist";
 import { persistReducer, persistStore } from "redux-persist";
 // import PouchDBStorage from "redux-persist-pouchdb";
-import persistLocalStorage from "redux-persist/lib/storage";
+import persistLocalStorageRaw from "redux-persist/lib/storage";
 // import thunk from "redux-thunk";
 import { ReplaySubject } from "rxjs";
+
+// Some bundlers (and Node ESM) expose redux-persist storage as `{ default: storage }`.
+// Normalize to the actual storage object to avoid `storage.getItem is not a function`.
+const persistLocalStorage: Storage = (persistLocalStorageRaw as any).default
+  ? (persistLocalStorageRaw as any).default
+  : (persistLocalStorageRaw as any);
 
 const Storages = {
   localStorage: persistLocalStorage,

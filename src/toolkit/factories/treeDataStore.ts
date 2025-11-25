@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 import type { Transform } from "redux-persist";
 import { persistReducer, persistStore } from "redux-persist";
 // import PouchDBStorage from "redux-persist-pouchdb";
-import persistLocalStorage from "redux-persist/lib/storage";
+import persistLocalStorageRaw from "redux-persist/lib/storage";
 // import thunk from "redux-thunk";
+
+// Normalize redux-persist storage so it's always the actual storage object,
+// not a `{ default: storage }` module wrapper.
+const persistLocalStorage: Storage = (persistLocalStorageRaw as any).default
+  ? (persistLocalStorageRaw as any).default
+  : (persistLocalStorageRaw as any);
 
 const Storages = {
   localStorage: persistLocalStorage,

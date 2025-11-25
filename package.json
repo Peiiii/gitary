@@ -23,7 +23,9 @@
   "scripts": {
     "test": "jest",
     "dev": "vite",
+    "typecheck": "NODE_OPTIONS=--max-old-space-size=8192 tsc --noEmit",
     "build": "NODE_OPTIONS=--max-old-space-size=8192 tsc && NODE_OPTIONS=--max-old-space-size=8192 vite build",
+    "build:fast": "NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
     "verify": "yarn lint:fix && yarn build",
@@ -128,7 +130,7 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.45.0",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -143,7 +145,7 @@
     "tailwindcss": "^3.4.4",
     "ts-jest": "^29.2.5",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5",
+    "vite": "npm:rolldown-vite@latest",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-monaco-editor": "^1.1.0",
     "vscode": "^1.1.37"
