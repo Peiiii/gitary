@@ -3,6 +3,7 @@ import { TextFileView } from "@/features/providers/provide-common-text-file-open
 import { COMMON_TEXT_FILE_EXTENSIONS, COMMON_TEXT_FILE_NAMES } from "@/features/providers/provide-common-text-file-opener/constants";
 import { createPlugin } from "xbook/common/createPlugin";
 import { EventKeys } from "@/constants/eventKeys";
+import { openFilePageWithLoading } from "@/features/providers/open-file-page-with-loading";
 
 export default createPlugin({
   addComponents(xbook) {
@@ -24,30 +25,12 @@ export default createPlugin({
         ...COMMON_TEXT_FILE_NAMES,
       ],
       init: (uri: string) => {
-        const pageId = `text-file-view:${uri}`;
-
-        // If this file is already open in a tab, just activate that tab
-        // instead of resetting its status back to "loading".
-        const existingPages =
-          xbook.layoutService.pageBox.getPageList?.() || [];
-        const existingPage = existingPages.find((page) => page.id === pageId);
-        if (existingPage) {
-          xbook.layoutService.pageBox.showPage(pageId);
-          return;
-        }
-
-        xbook.layoutService.pageBox.addPage({
-          id: pageId,
-          title: uri,
-          status: "loading",
-          viewData: {
-            type: "text-file-view",
-            props: {
-              uri,
-            },
-          },
+        openFilePageWithLoading({
+          xbook,
+          pageId: `text-file-view:${uri}`,
+          uri,
+          viewType: "text-file-view",
         });
-        xbook.eventBus.emit(EventKeys.FileLoading, { uri });
       },
     });
 

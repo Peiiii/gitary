@@ -3,7 +3,7 @@ import { openerService } from "@/services/opener.service";
 import { ZenmarkEditorComponent } from "@/features/providers/provide-zenmark-editor/zenmark-editor-component";
 import { createPlugin } from "xbook/common/createPlugin";
 import { t } from "@/i18n/utils";
-
+import { openFilePageWithLoading } from "@/features/providers/open-file-page-with-loading";
 
 export default createPlugin({
   async initilize(xbook) {
@@ -19,30 +19,12 @@ export default createPlugin({
       priority: -10,
       match: [".md", ".markdown", ".MD"],
       init: (uri: string) => {
-        const pageId = `zenmark-editor:${uri}`;
-
-        // If this markdown file is already open, just focus the existing tab
-        // so we don't reset its status back to "loading" without reloading.
-        const existingPages =
-          xbook.layoutService.pageBox.getPageList?.() || [];
-        const existingPage = existingPages.find((page) => page.id === pageId);
-        if (existingPage) {
-          xbook.layoutService.pageBox.showPage(pageId);
-          return;
-        }
-
-        xbook.layoutService.pageBox.addPage({
-          id: pageId,
-          title: uri,
-          status: "loading",
-          viewData: {
-            type: "zenmark-editor",
-            props: {
-              uri,
-            },
-          },
+        openFilePageWithLoading({
+          xbook,
+          pageId: `zenmark-editor:${uri}`,
+          uri,
+          viewType: "zenmark-editor",
         });
-        xbook.eventBus.emit(EventKeys.FileLoading, { uri });
       },
     });
 
