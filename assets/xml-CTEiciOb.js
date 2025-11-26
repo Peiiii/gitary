@@ -1,0 +1,1 @@
+import{Ft as e,Pt as t}from"./monaco-DgdKVRwT.js";export{t as conf,e as language};
