@@ -1,0 +1,1 @@
+import{an as e,in as t}from"./monaco-CigrPup9.js";export{t as conf,e as language};

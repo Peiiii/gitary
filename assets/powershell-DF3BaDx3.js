@@ -1,1 +1,0 @@
-import{Xt as e,Zt as t}from"./monaco-DDgSVtSx.js";export{e as conf,t as language};
