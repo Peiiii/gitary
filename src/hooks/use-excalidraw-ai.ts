@@ -7,7 +7,7 @@ import type {
 import { useToast } from "@/hooks/use-toast";
 import { useGlobalSidecar } from "@/features/global-sidecar-providers";
 import { excalidrawAIService } from "@/services/ai/excalidraw-ai.service";
-import type { ExcalidrawSceneValue } from "@/components/excalidraw-ai-canvas";
+import type { ExcalidrawSceneValue } from "@/components/excalidraw-shared";
 
 type ExcalidrawElement = NonNullable<
   ExcalidrawInitialDataState["elements"]
@@ -130,4 +130,3 @@ export function useExcalidrawAI({
     openExcalidrawAssistant,
   };
 }
-

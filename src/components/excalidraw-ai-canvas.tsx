@@ -1,4 +1,11 @@
 import { ExcalidrawAIIcon } from "@/components/icons/ai-assistant-icon";
+import {
+  AppState,
+  BinaryFiles,
+  ExcalidrawElement,
+  ExcalidrawSaveStatus,
+  ExcalidrawSceneValue,
+} from "@/components/excalidraw-shared";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -11,40 +18,19 @@ import { useExcalidrawRuntime } from "@/hooks/use-excalidraw-runtime";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
 import { Excalidraw } from "@excalidraw/excalidraw";
 import "@excalidraw/excalidraw/index.css";
-import type {
-  ExcalidrawImperativeAPI,
-  ExcalidrawInitialDataState
-} from "@excalidraw/excalidraw/types";
-import { AlertCircle, CheckCircle2, CircleDot, Loader2, Save } from "lucide-react";
+import type { ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types";
+import {
+  AlertCircle,
+  CheckCircle2,
+  CircleDot,
+  Loader2,
+  Save,
+} from "lucide-react";
 import { useCallback, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 // Feature flag: 暂时隐藏 Excalidraw AI 入口
 const ENABLE_EXCALIDRAW_AI = false;
-
-type ExcalidrawElement = NonNullable<
-  ExcalidrawInitialDataState["elements"]
->[number];
-type BinaryFiles = NonNullable<ExcalidrawInitialDataState["files"]>;
-type AppState = NonNullable<ExcalidrawInitialDataState["appState"]>;
-
-export type ExcalidrawSceneValue = {
-  elements?: ExcalidrawElement[];
-  files?: BinaryFiles;
-  appState?: AppState;
-}
-
-// 兼容旧命名，供上层文件读写存储使用。
-export type StoredFileData = ExcalidrawSceneValue;
-
-
-export enum ExcalidrawSaveStatus {
-  IDLE = "idle",
-  DIRTY = "dirty",
-  SAVING = "saving",
-  SAVED = "saved",
-  ERROR = "error"
-}
 
 interface ExcalidrawAICanvasProps {
   initialValue: ExcalidrawSceneValue | null;

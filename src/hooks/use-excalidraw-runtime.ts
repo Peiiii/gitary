@@ -8,7 +8,7 @@ import {
   unregisterExcalidraw,
   type ExcalidrawHandle,
 } from "@/services/excalidraw-runtime";
-import type { ExcalidrawSceneValue } from "@/components/excalidraw-ai-canvas";
+import type { ExcalidrawSceneValue } from "@/components/excalidraw-shared";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
 
 type ExcalidrawElement = NonNullable<
@@ -67,4 +67,3 @@ export function useExcalidrawRuntime({
     return () => unregisterExcalidraw(handle);
   }, [memoizedOnChange, sceneRef, excalidrawRef]);
 }
-

@@ -1,12 +1,18 @@
 import {
-  ExcalidrawAICanvas,
   ExcalidrawSaveStatus,
   type ExcalidrawSceneValue,
   type StoredFileData,
-} from "@/components/excalidraw-ai-canvas";
+} from "@/components/excalidraw-shared";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
 import { Uri } from "@/toolkit/vscode/uri";
-import { FC, useEffect, useMemo, useState } from "react";
+import {
+  FC,
+  Suspense,
+  lazy,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { BehaviorSubject } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, skip } from "rxjs/operators";
@@ -69,6 +75,11 @@ export const normalizeValueForStorage = (value: ExcalidrawSceneValue): Excalidra
   };
 };
 
+const LazyExcalidrawAICanvas = lazy(async () => {
+  const mod = await import("@/components/excalidraw-ai-canvas");
+  return { default: mod.ExcalidrawAICanvas };
+});
+
 export const AppExcalidraw: FC<{
   uri: string;
 }> = ({ uri }) => {
@@ -125,7 +136,7 @@ export const AppExcalidraw: FC<{
     return () => {
       sub.unsubscribe();
     };
-  }, [scene$]);
+  }, [scene$, saveData]);
 
   const handleSceneChange = useMemoizedFn((next: ExcalidrawSceneValue) => {
     scene$.next(next);
@@ -175,14 +186,21 @@ export const AppExcalidraw: FC<{
   }
 
   return (
-    <ExcalidrawAICanvas
-      key={uri}
-      initialValue={initialScene}
-      onChange={handleSceneChange}
-      showSaveStatus
-      // saveStatus={saveStatus}
-      saveStatus={saveStatus}
-      onSaveClick={handleManualSave}
-    />
+    <Suspense
+      fallback={
+        <div className="h-full w-full flex items-center justify-center text-sm text-muted-foreground">
+          {t("excalidraw.loading")}
+        </div>
+      }
+    >
+      <LazyExcalidrawAICanvas
+        key={uri}
+        initialValue={initialScene}
+        onChange={handleSceneChange}
+        showSaveStatus
+        saveStatus={saveStatus}
+        onSaveClick={handleManualSave}
+      />
+    </Suspense>
   );
 };

@@ -1,7 +1,7 @@
 import { createPlugin } from "xbook/common/createPlugin";
 import { GlobalSidecarProvider } from "xbook/global-sidecar/global-sidecar-provider";
 import { registerGlobalSidecarPane } from "xbook/global-sidecar/sidecar-pane-registry";
-import { GlobalChatPanel } from "./panes/global-chat-panel";
+import { GlobalChatPanelLazy } from "./panes/global-chat-panel.lazy";
 import { AIAssistantIcon, ExcalidrawAIIcon } from "@/components/icons/ai-assistant-icon";
 import { ExcalidrawPaneBridge } from "./panes/excalidraw-pane-bridge";
 
@@ -18,7 +18,7 @@ const ensurePanes = () => {
     description: "跨页面问答与命令",
     icon: AIAssistantIcon,
     order: 1,
-    component: GlobalChatPanel,
+    component: GlobalChatPanelLazy,
   });
   if (ENABLE_EXCALIDRAW_AI) {
     registerGlobalSidecarPane({

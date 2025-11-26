@@ -57,7 +57,8 @@ export default defineConfig({
     ],
   },
   build: {
-    minify: false,
+    // Enable minification to shrink JS payload in production builds.
+    // Rolldown/ESBuild minification is fast enough for our bundle size.
     outDir: "dist/",
     rollupOptions: {
       input: {
