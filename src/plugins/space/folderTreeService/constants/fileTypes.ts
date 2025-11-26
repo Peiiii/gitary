@@ -1,9 +1,9 @@
+import { PenTool } from "lucide-react";
 import {
   AiFillCode,
   AiFillFile,
-  AiFillFileMarkdown,
   AiFillFileText,
-  AiFillHtml5,
+  AiFillHtml5
 } from "react-icons/ai";
 import {
   SiCss3,
@@ -14,14 +14,20 @@ import {
   SiRust,
   SiTypescript,
 } from "react-icons/si";
+import type { ComponentType } from "react";
 
 export interface FileTypeConfig {
   extensions: string[];
-  icon: any;
+  icon: ComponentType<{ className?: string; size?: number | string; color?: string }>;
   color: string;
 }
 
 export const FILE_TYPES: Record<string, FileTypeConfig> = {
+  excalidraw: {
+    extensions: [".excalidraw.json", ".excalidraw"],
+    icon: PenTool,
+    color: "#6366f1",
+  },
   markdown: {
     extensions: [".md", ".markdown"],
     icon: SiMarkdown,
@@ -80,11 +86,13 @@ export const FILE_TYPES: Record<string, FileTypeConfig> = {
 };
 
 export const getFileTypeByExtension = (filename: string): FileTypeConfig => {
-  const extension = `.${filename.split(".").pop()?.toLowerCase()}`;
-
+  const lowerFilename = filename.toLowerCase();
+  
   for (const [, config] of Object.entries(FILE_TYPES)) {
-    if (config.extensions.includes(extension)) {
-      return config;
+    for (const ext of config.extensions) {
+      if (lowerFilename.endsWith(ext.toLowerCase())) {
+        return config;
+      }
     }
   }
 
