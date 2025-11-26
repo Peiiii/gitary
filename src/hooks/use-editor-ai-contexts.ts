@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { spaceHelper } from "@/helpers/space.helper";
 import { aiContextService } from "@/services/ai/context-service";
 import { layoutService } from "xbook/services";
-import type { GlobalAIContextItem } from "@/hooks/use-provide-global-ai-contexts";
+import { AgentContext } from "@/core/stores/ai-context.store";
 
-export function useEditorAIContexts(): GlobalAIContextItem[] {
+export function useEditorAIContexts(): AgentContext[] {
   const [currentSpaceId, setCurrentSpaceId] = useState<string | null>(null);
   const [currentFileContext, setCurrentFileContext] = useState<string | null>(null);
 
@@ -61,8 +61,8 @@ export function useEditorAIContexts(): GlobalAIContextItem[] {
     };
   }, []);
 
-  const contexts = useMemo<GlobalAIContextItem[]>(() => {
-    const ctx: GlobalAIContextItem[] = [];
+  const contexts = useMemo<AgentContext[]>(() => {
+    const ctx: AgentContext[] = [];
 
     if (currentSpaceId) {
       ctx.push({

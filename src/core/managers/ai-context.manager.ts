@@ -1,21 +1,10 @@
-import { useAIContextStore } from "@/core/stores/ai-context.store";
-import { AIContextItem } from "@/hooks/use-provide-global-ai-contexts";
+import { AgentContextWithId, useAIContextStore } from "@/core/stores/ai-context.store";
 import type { Context as AgentContext } from "@agent-labs/agent-chat";
-
-interface ContextUpdate {
-  id: string;
-  description: string;
-  value: string;
-}
 
 export class AIContextManager {
 
-  addContexts = (contexts: AIContextItem[]) => {
+  addContexts = (contexts: AgentContextWithId[]) => {
     useAIContextStore.getState().addContexts(contexts);
-  };
-
-  updateContexts = (updates: ContextUpdate[]) => {
-    useAIContextStore.getState().updateContexts(updates);
   };
 
   removeContexts = (ids: string[]) => {
