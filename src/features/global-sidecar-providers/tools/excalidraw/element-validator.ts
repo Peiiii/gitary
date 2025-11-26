@@ -1,17 +1,59 @@
 import type { ExcalidrawElement } from "./types";
 
+function validateElement(
+  element: unknown,
+  index: number
+): string | null {
+  if (!element || typeof element !== "object") {
+    return `Element ${index} must be an object`;
+  }
+
+  const el = element as Record<string, unknown>;
+
+  if (!el.type || typeof el.type !== "string") {
+    return `Element ${index} is missing required field: type`;
+  }
+
+  if (el.type === "arrow") {
+    if (el.points !== undefined) {
+      if (!Array.isArray(el.points)) {
+        return `Arrow element ${index} points must be an array`;
+      }
+      const points = el.points as unknown[];
+      if (points.length > 0 && points.length < 2) {
+        return `Arrow element ${index} must have at least 2 points if points array is provided`;
+      }
+    }
+  }
+
+  return null;
+}
+
 export function validateAndCompleteElements(
   elements: unknown[]
 ): ExcalidrawElement[] {
   if (!Array.isArray(elements)) {
-    throw new Error("元素必须是数组格式");
+    throw new Error("Elements must be an array");
+  }
+
+  if (elements.length === 0) {
+    throw new Error("Elements array cannot be empty");
+  }
+
+  const errors: string[] = [];
+
+  for (let i = 0; i < elements.length; i++) {
+    const error = validateElement(elements[i], i);
+    if (error) {
+      errors.push(error);
+    }
+  }
+
+  if (errors.length > 0) {
+    throw new Error(`Validation failed: ${errors.join("; ")}`);
   }
 
   return elements.map((element, index) => {
-    if (!element || typeof element !== "object") {
-      throw new Error(`元素 ${index} 必须是对象`);
-    }
-
     const timestamp = Date.now() + index;
     const el = element as Record<string, unknown>;
     const baseElement = {

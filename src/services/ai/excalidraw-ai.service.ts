@@ -23,14 +23,14 @@ export class ExcalidrawAIService {
 - backgroundColor: 背景颜色（可选，默认 "transparent"）
 
 文本元素额外字段：
-- text: 文本内容
+   - text: 文本内容
 - fontSize: 字体大小（默认 20）
 - fontFamily: 字体族（1=normal, 2=code, 3=hand, 4=hand-drawn，默认 1）
 - textAlign: 对齐方式（"left", "center", "right"，默认 "center"）
 - verticalAlign: 垂直对齐（"top", "middle", "bottom"，默认 "middle"）
 
 箭头元素额外字段：
-- points: 点数组，如 [[0, 0], [100, 100]]
+   - points: 点数组，如 [[0, 0], [100, 100]]
 - startArrowhead: null 或 "arrow"（默认 null）
 - endArrowhead: "arrow" 或 null（默认 "arrow"）
 
