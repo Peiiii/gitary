@@ -1,0 +1,1 @@
+import{n as e}from"./excalidraw-DJ-i7Io4.js";export{e as WorkerUrl};

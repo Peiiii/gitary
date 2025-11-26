@@ -1,1 +1,0 @@
-import{n as e}from"./excalidraw-DfYQ71Zq.js";export{e as WorkerUrl};
