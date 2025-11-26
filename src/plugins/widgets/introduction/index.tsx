@@ -23,7 +23,9 @@ export default createPlugin({
         xbook.modalService.open({
           content: <IntroductionPage />,
           footer: false,
-          width: "720px"
+          width: "720px",
+          height: "80vh",
+          modalBodyClassName: "p-0 h-full overflow-hidden"
         });
       }
     );

@@ -9,7 +9,7 @@
 - 在仓库页面（GitHub/Gitee/GitCode）点击扩展图标，即可在 Gitary 中打开对应仓库。
 - 在仓库页面或链接上右键，选择「在 Gitary 中打开此仓库」。
 - 支持 **GitHub**、**Gitee** 和 **GitCode** 平台。
-- 在 Gitary 中享受**类 Notion 编辑**和**Excalidraw 画图**能力，提升笔记和图表创作体验。
+- 在 Gitary 中享受**类 Notion 编辑**、**AI 智能画图**和**全局 AI 助手**能力，提升笔记、AI 生成图表和智能辅助体验。
 
 ## 安装
 

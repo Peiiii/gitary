@@ -8,8 +8,9 @@ import { useTranslation } from "react-i18next";
 export const IntroductionPage = () => {
   const { t } = useTranslation();
   return (
-    <div className="p-6 max-w-[1400px] mx-auto">
-      <div className="space-y-8">
+    <div className="h-full overflow-y-auto">
+      <div className="p-6">
+        <div className="space-y-8">
         <div className="space-y-4 text-center">
           <div className="flex justify-center">
             <GitaryBrand showLogo={true} showName={true} size="lg" />
@@ -32,6 +33,16 @@ export const IntroductionPage = () => {
             description={t("introduction.markdownEditorDesc")}
           />
           <FeatureCard
+            icon="🤖"
+            title={t("introduction.aiDrawing")}
+            description={t("introduction.aiDrawingDesc")}
+          />
+          <FeatureCard
+            icon="💬"
+            title={t("introduction.aiAssistant")}
+            description={t("introduction.aiAssistantDesc")}
+          />
+          <FeatureCard
             icon="📱"
             title={t("introduction.convenientAccess")}
             description={t("introduction.convenientAccessDesc")}
@@ -51,6 +62,7 @@ export const IntroductionPage = () => {
           >
             {t("introduction.getStarted")}
           </Button>
+        </div>
         </div>
       </div>
     </div>

@@ -37,3 +37,16 @@ Choose **GitHub** or **Gitee** from the menu.
 
 After successful connection, you can see the repository files in the left file tree and start creating and editing your notes!
 
+## 🤖 AI Features
+
+After connecting your Git repository, you can also use Gitary's powerful AI features:
+
+- **AI-Powered Diagram Generation**: In Excalidraw files, open the AI assistant and describe in natural language to automatically generate diagrams
+- **Global AI Assistant**: Click the AI icon in the sidebar for intelligent help anytime. The AI can:
+  - Read and search files
+  - Generate and edit Excalidraw diagrams
+  - Analyze code and documents
+  - Provide context-aware suggestions
+
+All AI-generated content is saved directly to your Git repository, enjoying full version control!
+

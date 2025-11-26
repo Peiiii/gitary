@@ -9,7 +9,7 @@ Open GitHub, Gitee, and GitCode repositories in Gitary (`gitary.app`) with one c
 - Click the extension icon on a repository page (GitHub/Gitee/GitCode) to open it in Gitary.
 - Right-click on repository pages or links and select "Open in Gitary".
 - Supports **GitHub**, **Gitee**, and **GitCode** platforms.
-- Enjoy **Notion-like editing** and **Excalidraw drawing** capabilities in Gitary for enhanced note-taking and diagram creation.
+- Enjoy **Notion-like editing**, **AI-powered Excalidraw drawing**, and **Global AI Assistant** capabilities in Gitary for enhanced note-taking, AI-generated diagrams, and intelligent assistance.
 
 ## Installation
 

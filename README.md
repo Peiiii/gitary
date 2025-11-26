@@ -35,9 +35,11 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
 
 ## 🎯 Why Gitary?
 
-**Notion-like Experience + Git's Data Ownership = Perfect Knowledge Management**
+**Notion-like Experience + AI-Powered Drawing + Git's Data Ownership = Perfect Knowledge Management**
 
 - ✅ **Familiar Editing Experience**: Elegant Markdown editor with Notion-like WYSIWYG editing
+- ✅ **AI-Powered Diagram Generation**: Generate diagrams from natural language descriptions
+- ✅ **Global AI Assistant**: Intelligent assistant with tool integration and context awareness
 - ✅ **Complete Data Control**: Notes stored directly in **your** GitHub/Gitee/GitCode repositories
 - ✅ **Powerful Version Management**: Full Git capabilities to track every change
 - ✅ **No Service Dependency**: Even if Gitary stops, your notes remain in your Git repos
@@ -84,11 +86,33 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
 - Professional drawing tools with shapes, arrows, and text
 - Perfect for technical documentation and visual note-taking
 
+### 🤖 AI-Powered Diagram Generation
+
+- **Natural Language to Diagrams**: Describe your diagram in natural language, and AI generates it automatically
+- **Smart Chart Creation**: Supports flowcharts, architecture diagrams, system diagrams, and more
+- **Intelligent Diagram Editing**: AI can analyze existing diagrams, add nodes, connect arrows, rename, and delete elements
+- **Context-Aware**: AI automatically understands your current Excalidraw canvas content
+- **Dual Generation Modes**: 
+  - Specialized AI model for complex diagrams
+  - Direct Agent generation for simple diagrams (faster)
+
+### 💬 Global AI Assistant
+
+- **Cross-Page AI Assistant**: Global sidebar AI assistant, always available
+- **Tool Integration**: AI can operate file system, Excalidraw, workspace, and more
+- **Context-Aware**: 
+  - Automatically understands current file content
+  - Automatically understands current Excalidraw canvas
+  - Automatically understands browser tab information
+- **Multi-Tool Collaboration**: File operations, diagram operations, workspace management
+
 ## 🆚 Gitary vs Notion
 
 | Feature | Notion | Gitary |
 |---------|--------|--------|
 | **Editing Experience** | ✅ Excellent | ✅ Notion-like, Equally Excellent |
+| **AI Diagram Generation** | ❌ Not supported | ✅ **Natural language to diagrams** |
+| **AI Assistant** | ⚠️ Limited | ✅ **Global AI with tool integration** |
 | **Data Storage** | ❌ Notion servers | ✅ **Your Git repositories** |
 | **Data Ownership** | ❌ Not fully owned | ✅ **Complete ownership** |
 | **Version Control** | ⚠️ History only | ✅ **Full Git capabilities** |
@@ -99,10 +123,10 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
 
 ## 💡 Use Cases
 
-- 👨‍💻 **Developers**: Manage technical notes like code, leveraging Git's version control
-- 📚 **Technical Writers**: Store documentation directly in code repositories, manage alongside project code
-- 🎓 **Learners**: Track learning progress through Git history, build knowledge systems
-- 🏢 **Teams**: Collaborate through Git's collaboration features, share team knowledge
+- 👨‍💻 **Developers**: Manage technical notes like code, leverage Git's version control, and use AI to generate architecture diagrams
+- 📚 **Technical Writers**: Store documentation directly in code repositories, use AI to create diagrams from descriptions
+- 🎓 **Learners**: Track learning progress through Git history, use AI assistant for learning guidance
+- 🏢 **Teams**: Collaborate through Git's collaboration features, use AI to generate and edit team diagrams
 
 ## 🚀 Quick Start
 
@@ -127,4 +151,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-**Gitary** - Notion-like editing + Excalidraw drawing for your Git repositories. Your notes, your data, your control.
+**Gitary** - Notion-like editing + AI-powered Excalidraw drawing + Global AI Assistant for your Git repositories. Your notes, your data, your control.

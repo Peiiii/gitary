@@ -7,6 +7,8 @@ import readMeContentZh from "./readme.md?raw";
 import readMeContentEn from "./readme.en.md?raw";
 import connectGitContentZh from "./connect-git.md?raw";
 import connectGitContentEn from "./connect-git.en.md?raw";
+import markdownTutorialContentZh from "./markdown-tutorial.md?raw";
+import markdownTutorialContentEn from "./markdown-tutorial.en.md?raw";
 import excalidrawExampleZh from "./excalidraw-example-zh.json?raw";
 import excalidrawExampleEn from "./excalidraw-example-en.json?raw";
 
@@ -50,6 +52,11 @@ const getReadMeContent = (): string => {
 const getConnectGitContent = (): string => {
   const lang = getCurrentLanguage();
   return lang === "en" ? connectGitContentEn : connectGitContentZh;
+};
+
+const getMarkdownTutorialContent = (): string => {
+  const lang = getCurrentLanguage();
+  return lang === "en" ? markdownTutorialContentEn : markdownTutorialContentZh;
 };
 
 const getExcalidrawExampleContent = (): string => {
@@ -98,11 +105,14 @@ export const pluginAddInitialIndexedDbSpace = createPlugin({
           
           const lang = getCurrentLanguage();
           const connectGitFileName = lang === "en" ? "/Connect-Git-Repository.md" : "/连接-Git-仓库.md";
+          const markdownTutorialFileName = lang === "en" ? "/Markdown-Tutorial.md" : "/Markdown-教程.md";
           const excalidrawExampleFileName = lang === "zh" ? "/Excalidraw-示例.excalidraw.json" : "/Excalidraw-Example.excalidraw.json";
+          const markdownTutorialContent = getMarkdownTutorialContent();
           const excalidrawExampleContent = getExcalidrawExampleContent();
           
           await createFileIfNotExists("/README.md", readMeContent);
           await createFileIfNotExists(connectGitFileName, connectGitContent);
+          await createFileIfNotExists(markdownTutorialFileName, markdownTutorialContent);
           await createFileIfNotExists(excalidrawExampleFileName, excalidrawExampleContent);
           
           cache.set(space.id, {
