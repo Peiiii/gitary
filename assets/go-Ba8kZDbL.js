@@ -1,1 +1,0 @@
-import{fn as e,pn as t}from"./monaco-DAysoKWz.js";export{e as conf,t as language};
