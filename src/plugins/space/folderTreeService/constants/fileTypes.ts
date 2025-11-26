@@ -92,11 +92,11 @@ export const FILE_TYPES: Record<string, FileTypeConfig> = {
 
 export const getFileTypeByExtension = (filename: string): FileTypeConfig => {
   const lowerFilename = filename.toLowerCase();
-  
+
   for (const [, config] of Object.entries(FILE_TYPES)) {
     for (const ext of config.extensions) {
       if (lowerFilename.endsWith(ext.toLowerCase())) {
-        return config;
+      return config;
       }
     }
   }

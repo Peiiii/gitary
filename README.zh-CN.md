@@ -39,6 +39,11 @@
   <p><em>类 Notion 的 Markdown 编辑器，支持实时预览</em></p>
 </div>
 
+<div align="center">
+  <img src="images/screenshots/gitary-screenshot-markdown-using-monaco.png" alt="Gitary Monaco 编辑器" width="800"/>
+  <p><em>Monaco 编辑器 - 专业的代码和 Markdown 源码编辑，支持语法高亮</em></p>
+</div>
+
 ## 🎯 为什么选择 Gitary？
 
 **类 Notion 体验 + AI 智能画图 + Git 的数据所有权 = 完美的知识管理方案**
@@ -55,6 +60,7 @@
 ### 📝 类 Notion 编辑体验
 
 - 所见即所得的 Markdown 编辑器
+- Monaco 编辑器，专业的代码和 Markdown 源码编辑
 - Slash commands 快速格式化
 - 支持数学公式、图表、代码高亮
 - 直观优雅的写作体验
@@ -72,9 +78,10 @@
 - 可自定义的工作区
 - 专业的开发环境，适合技术文档写作
 
-### 📂 强大的代码阅读能力
+### 📂 强大的代码阅读与编辑能力
 
 - 打开和查看代码文件，语法高亮显示
+- Monaco 编辑器，专业的代码编辑（与 VS Code 相同的引擎）
 - 比传统 Git 客户端更好的仓库浏览体验
 - 轻松浏览你的代码库
 

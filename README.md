@@ -38,6 +38,11 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
   <p><em>Notion-like Markdown editor with live preview</em></p>
 </div>
 
+<div align="center">
+  <img src="images/screenshots/gitary-screenshot-markdown-using-monaco.png" alt="Gitary Monaco Editor" width="800"/>
+  <p><em>Monaco Editor - Professional code and Markdown source editing with syntax highlighting</em></p>
+</div>
+
 ## 🎯 Why Gitary?
 
 **Notion-like Experience + AI-Powered Drawing + Git's Data Ownership = Perfect Knowledge Management**
@@ -54,6 +59,7 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
 ### 📝 Notion-like Editing Experience
 
 - WYSIWYG Markdown editor with live preview
+- Monaco Editor for professional code and Markdown source editing
 - Slash commands for quick formatting
 - Support for mathematical formulas, charts, and code highlighting
 - Intuitive and elegant writing experience
@@ -71,9 +77,10 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
 - Customizable workspace for your workflow
 - Professional development environment perfect for technical documentation
 
-### 📂 Enhanced Code Reading
+### 📂 Enhanced Code Reading & Editing
 
 - Open and view code files with syntax highlighting
+- Monaco Editor for professional code editing (same engine as VS Code)
 - Better repository browsing experience than traditional Git clients
 - Navigate your codebase with ease
 
