@@ -1,0 +1,1 @@
+import{_n as e}from"./app-HD19YyAJ.js";function t(e,t){var n,r,i;e.accDescr&&((n=t.setAccDescription)==null||n.call(t,e.accDescr)),e.accTitle&&((r=t.setAccTitle)==null||r.call(t,e.accTitle)),e.title&&((i=t.setDiagramTitle)==null||i.call(t,e.title))}e(t,`populateCommonDb`);export{t};

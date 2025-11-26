@@ -1,0 +1,1 @@
+import{vn as e,yn as t}from"./monaco-BOU7eshl.js";export{e as conf,t as language};

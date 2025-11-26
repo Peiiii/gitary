@@ -1,0 +1,1 @@
+import"./chakra-ui-DL3iEWi3.js";import"./react-utils-C9u-5Qte.js";import"./vendor-Ddcx14uX.js";import{Xr as e,Yr as t}from"./app-HD19YyAJ.js";export{e as openerService};

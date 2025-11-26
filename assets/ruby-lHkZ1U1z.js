@@ -1,0 +1,1 @@
+import{Kt as e,qt as t}from"./monaco-BOU7eshl.js";export{e as conf,t as language};
