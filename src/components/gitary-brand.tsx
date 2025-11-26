@@ -1,4 +1,5 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
+import { getCurrentDomain } from "@/core/utils/domain-config";
 
 export const GitaryBrand = ({ 
   showLogo = true, 
@@ -16,8 +17,22 @@ export const GitaryBrand = ({
   };
   const styles = sizeMap[size];
 
+  const handleClick = () => {
+    const currentDomain = getCurrentDomain();
+    if (currentDomain !== 'gitary.app' && currentDomain !== 'www.gitary.app') {
+      window.open('https://gitary.app', '_blank');
+    }
+  };
+
   return (
-    <Flex align="center" gap={2}>
+    <Flex 
+      align="center" 
+      gap={2}
+      onClick={handleClick}
+      cursor="pointer"
+      _hover={{ opacity: 0.8 }}
+      transition="opacity 0.2s"
+    >
       {showLogo && (
         <Image
           src="/logo.svg"
