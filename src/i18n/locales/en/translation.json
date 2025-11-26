@@ -163,7 +163,8 @@
     "aiStoryCards": "AI Story Cards",
     "aiResume": "AI Resume Assistant",
     "aiQuotes": "AI Quotes",
-    "excalidraw": "Excalidraw Canvas"
+    "excalidraw": "Excalidraw Canvas",
+    "drawio": "Draw.io Diagram"
   },
   "globalChat": {
     "welcomeTitle": "How can I help you today?",
@@ -261,6 +262,17 @@
       "aiAppendDiagramPromptDescription": "Description of the diagram content to generate.",
       "elementsRequired": "elements parameter must be an array containing at least one element."
     }
+  },
+  "drawio": {
+    "title": "Draw.io Diagram Editor",
+    "loading": "Loading editor...",
+    "newFile": "New Draw.io diagram",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "saveError": "Save failed",
+    "edited": "Unsaved changes",
+    "saveNow": "Save now",
+    "uriRequired": "URI is required"
   },
   "story": {
     "loadDataFailed": "Failed to Load Data",

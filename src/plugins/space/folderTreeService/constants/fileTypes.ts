@@ -1,4 +1,4 @@
-import { PenTool } from "lucide-react";
+import { PenTool, Network } from "lucide-react";
 import {
   AiFillCode,
   AiFillFile,
@@ -27,6 +27,11 @@ export const FILE_TYPES: Record<string, FileTypeConfig> = {
     extensions: [".excalidraw.json", ".excalidraw"],
     icon: PenTool,
     color: "#6366f1",
+  },
+  drawio: {
+    extensions: [".drawio", ".xml"],
+    icon: Network,
+    color: "#f59e0b",
   },
   markdown: {
     extensions: [".md", ".markdown"],
