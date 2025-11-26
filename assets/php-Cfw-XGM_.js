@@ -1,1 +1,0 @@
-import{$t as e,Qt as t}from"./monaco-CscFXnq9.js";export{t as conf,e as language};
