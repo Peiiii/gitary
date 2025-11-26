@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { spaceHelper } from "@/helpers/space.helper";
 import { aiContextService } from "@/services/ai/context-service";
 import { layoutService } from "xbook/services";
-import { AgentContext } from "@/core/stores/ai-context.store";
+import type { AgentContext } from "@/core/stores/ai-context.store";
 
 export function useEditorAIContexts(): AgentContext[] {
   const [currentSpaceId, setCurrentSpaceId] = useState<string | null>(null);
@@ -83,4 +83,3 @@ export function useEditorAIContexts(): AgentContext[] {
 
   return contexts;
 }
-

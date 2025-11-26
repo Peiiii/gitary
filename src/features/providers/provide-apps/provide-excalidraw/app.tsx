@@ -3,6 +3,7 @@ import {
   type ExcalidrawSceneValue,
   type StoredFileData,
 } from "@/components/excalidraw-shared";
+import { useProvideExcalidrawAIContexts } from "@/hooks/use-provide-excalidraw-ai-contexts";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
 import { Uri } from "@/toolkit/vscode/uri";
 import {
@@ -108,7 +109,6 @@ export const AppExcalidraw: FC<{
   });
 
 
-  // 场景变化 → 防抖 → 去重 → 自动保存
   useEffect(() => {
     const sub = scene$
       .pipe(
@@ -118,11 +118,12 @@ export const AppExcalidraw: FC<{
         ),
         debounceTime(1000),
         distinctUntilChanged(
-          (a, b) => buildSceneSnapshot(a) === buildSceneSnapshot(b),
+          (a: ExcalidrawSceneValue, b: ExcalidrawSceneValue) =>
+            buildSceneSnapshot(a) === buildSceneSnapshot(b),
         ),
         skip(1),
       )
-      .subscribe(async (value) => {
+      .subscribe(async (value: ExcalidrawSceneValue) => {
         try {
           setSaveStatus(ExcalidrawSaveStatus.SAVING);
           await saveData(value);
@@ -172,6 +173,8 @@ export const AppExcalidraw: FC<{
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [handleManualSave]);
+
+  useProvideExcalidrawAIContexts(scene$);
 
   if (!uri) {
     return <div>{t("excalidraw.uriRequired")}</div>;
