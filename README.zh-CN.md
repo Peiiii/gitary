@@ -7,10 +7,6 @@
 
 将 Notion 风格的强大编辑体验和专业图表绘制能力（Excalidraw & Draw.io）带到你的 Git 仓库中。你的笔记，你的数据，你的控制权。
 
-## ⭐ Star 趋势
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Peiiii/gitary&type=Date)](https://star-history.com/#Peiiii/gitary&Date)
-
 ## 🌐 在线体验
 
 **[在线体验 Gitary →](https://gitary.app/)**
@@ -47,6 +43,10 @@
   <img src="images/screenshots/gitary-screenshot-markdown-using-monaco.png" alt="Gitary Monaco 编辑器" width="800"/>
   <p><em>Monaco 编辑器 - 专业的代码和 Markdown 源码编辑，支持语法高亮</em></p>
 </div>
+
+## ⭐ Star 趋势
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Peiiii/gitary&type=Date)](https://star-history.com/#Peiiii/gitary&Date)
 
 ## 🎯 为什么选择 Gitary？
 

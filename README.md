@@ -6,10 +6,6 @@
 
 Bring Notion-style powerful editing experience and professional diagramming capabilities (Excalidraw & Draw.io) to your Git repositories. Your notes, your data, your control.
 
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Peiiii/gitary&type=Date)](https://star-history.com/#Peiiii/gitary&Date)
-
 ## 🌐 Try Online
 
 **[Try Gitary Online →](https://gitary.app/)**
@@ -46,6 +42,10 @@ For more details, see the [Gitary Companion README](browser-extension/gitary-com
   <img src="images/screenshots/gitary-screenshot-markdown-using-monaco.png" alt="Gitary Monaco Editor" width="800"/>
   <p><em>Monaco Editor - Professional code and Markdown source editing with syntax highlighting</em></p>
 </div>
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Peiiii/gitary&type=Date)](https://star-history.com/#Peiiii/gitary&Date)
 
 ## 🎯 Why Gitary?
 
