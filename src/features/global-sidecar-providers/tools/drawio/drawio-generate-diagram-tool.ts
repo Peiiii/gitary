@@ -74,7 +74,6 @@ async function mergeDrawioXml(existingXml: string, newXml: string): Promise<stri
       return newXml;
     }
 
-    const existingDiagrams = existingRoot.querySelectorAll("diagram");
     const newDiagrams = newRoot.querySelectorAll("diagram");
 
     newDiagrams.forEach((newDiagram, index) => {

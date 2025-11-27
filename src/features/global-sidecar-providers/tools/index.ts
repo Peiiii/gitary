@@ -12,6 +12,7 @@ import {
 import {
   drawioGenerateDiagramTool,
   drawioAnalyzeTool,
+  drawioModifyTool,
 } from "./drawio";
 
 export const GLOBAL_AGENT_TOOLS: Tool[] = [
@@ -27,4 +28,5 @@ export const GLOBAL_AGENT_TOOLS: Tool[] = [
   excalidrawModifyTool,
   drawioGenerateDiagramTool,
   drawioAnalyzeTool,
+  drawioModifyTool,
 ];
