@@ -6,6 +6,10 @@
 
 Bring Notion-style powerful editing experience and professional diagramming capabilities (Excalidraw & Draw.io) to your Git repositories. Your notes, your data, your control.
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Peiiii/gitary&type=Date)](https://star-history.com/#Peiiii/gitary&Date)
+
 ## 🌐 Try Online
 
 **[Try Gitary Online →](https://gitary.app/)**

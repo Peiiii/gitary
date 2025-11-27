@@ -7,6 +7,10 @@
 
 将 Notion 风格的强大编辑体验和专业图表绘制能力（Excalidraw & Draw.io）带到你的 Git 仓库中。你的笔记，你的数据，你的控制权。
 
+## ⭐ Star 趋势
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Peiiii/gitary&type=Date)](https://star-history.com/#Peiiii/gitary&Date)
+
 ## 🌐 在线体验
 
 **[在线体验 Gitary →](https://gitary.app/)**
