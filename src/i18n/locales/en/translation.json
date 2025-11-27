@@ -315,6 +315,14 @@
       "generateError": "Error generating diagram, please try again"
     }
   },
+  "tabs": {
+    "loading": "Loading",
+    "unsaved": "Unsaved",
+    "closeRight": "Close tabs to the right",
+    "closeLeft": "Close tabs to the left",
+    "closeOthers": "Close other tabs",
+    "closeAll": "Close all tabs"
+  },
   "story": {
     "loadDataFailed": "Failed to Load Data",
     "loadDataFailedDesc": "Unable to load saved data, please check your storage settings.",

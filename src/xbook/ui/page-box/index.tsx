@@ -28,6 +28,7 @@ import { DragSortItem, moveItem } from "xbook/ui/components/DragSort";
 import { PageActions } from "xbook/ui/page-box/components/page-actions";
 import { PageBoxController } from "xbook/ui/page-box/controller";
 import { componentService } from "../componentService";
+import { t } from "@/i18n/utils";
 import { Tab, TabIconButton } from "../components/tab";
 
 export const createPageBox = (): {
@@ -64,7 +65,7 @@ export const createPageBox = (): {
     const getPageActions = (id: string) => {
       return [
         {
-          label: "关闭右侧标签页",
+          label: t("tabs.closeRight"),
           icon: AiOutlineArrowRight,
           onClick: () => {
             const currentIndex = pageList.findIndex((page) => page.id === id);
@@ -73,7 +74,7 @@ export const createPageBox = (): {
           },
         },
         {
-          label: "关闭左侧标签页",
+          label: t("tabs.closeLeft"),
           icon: AiOutlineArrowLeft,
           onClick: () => {
             const currentIndex = pageList.findIndex((page) => page.id === id);
@@ -82,7 +83,7 @@ export const createPageBox = (): {
           },
         },
         {
-          label: "关闭其它标签页",
+          label: t("tabs.closeOthers"),
           icon: AiOutlineClose,
           onClick: () => {
             pageList.forEach((page) => {
@@ -93,7 +94,7 @@ export const createPageBox = (): {
           },
         },
         {
-          label: "关闭所有标签页",
+          label: t("tabs.closeAll"),
           icon: AiOutlineCloseCircle,
           onClick: () => {
             pageList.forEach((page) => {

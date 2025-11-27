@@ -302,6 +302,14 @@
       "generateError": "生成图表时出错，请重试"
     }
   },
+  "tabs": {
+    "loading": "加载中",
+    "unsaved": "未保存",
+    "closeRight": "关闭右侧标签页",
+    "closeLeft": "关闭左侧标签页",
+    "closeOthers": "关闭其它标签页",
+    "closeAll": "关闭所有标签页"
+  },
   "story": {
     "loadDataFailed": "加载数据失败",
     "loadDataFailedDesc": "无法加载保存的数据，请检查您的存储设置。",
