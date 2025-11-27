@@ -1,0 +1,1 @@
+import{n as e}from"./excalidraw-Cf_JUYcz.js";export{e as WorkerUrl};
