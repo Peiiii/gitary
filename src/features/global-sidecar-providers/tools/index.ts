@@ -9,6 +9,10 @@ import {
   excalidrawAppendDiagramTool,
   excalidrawModifyTool,
 } from "./excalidraw";
+import {
+  drawioGenerateDiagramTool,
+  drawioAnalyzeTool,
+} from "./drawio";
 
 export const GLOBAL_AGENT_TOOLS: Tool[] = [
   getWorkspaceContextTool,
@@ -21,4 +25,6 @@ export const GLOBAL_AGENT_TOOLS: Tool[] = [
   excalidrawCreateDiagramTool,
   excalidrawAppendDiagramTool,
   excalidrawModifyTool,
+  drawioGenerateDiagramTool,
+  drawioAnalyzeTool,
 ];

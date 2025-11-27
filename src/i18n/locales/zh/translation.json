@@ -263,7 +263,17 @@
     "saveError": "保存失败",
     "edited": "有未保存更改",
     "saveNow": "立即保存",
-    "uriRequired": "需要提供 URI"
+    "uriRequired": "需要提供 URI",
+    "tools": {
+      "noCanvas": "当前没有可用的 Draw.io 画布。请在一个 Draw.io 文件中打开画布后再重试。",
+      "emptyCanvas": "当前画布为空，无法进行分析。",
+      "promptRequired": "prompt 不能为空。",
+      "analysisFailed": "分析图表时出错，请重试。",
+      "generateDiagramDescription": "根据自然语言描述生成一张新的 Draw.io 图表，并写入当前画布。适合从零创建流程图、架构图、UML 图等。",
+      "generateDiagramPromptDescription": "你想要的图表描述，例如\"一个包含前端、后端和数据库的三层 Web 系统架构图\"。",
+      "generateDiagramModeDescription": "append=在现有图的基础上追加元素，replace=清空当前画布并只保留新图。",
+      "analyzeDescription": "分析当前 Draw.io 画布中的主要节点和连接关系，用于理解现有图表结构。返回节点、边的信息和图表摘要。"
+    }
   },
   "story": {
     "loadDataFailed": "加载数据失败",

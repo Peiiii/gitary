@@ -170,9 +170,12 @@ export const createTreeService = (
       spaceId: string,
       node: TreeDataNode<FolderTreeNode>
     ): Promise<TreeDataNode<FolderTreeNode>> => {
-      const oldNode = dataStore.getNode(node.id)!;
       const viewState = viewStateStore.getData().find((v) => v.id === node.id);
       if (!viewState || !viewState.expanded) return node;
+
+      // oldNode may be missing if view state was restored for a node
+      // that is not yet present in the current tree data.
+      const oldNode = dataStore.getNode(node.id);
 
       const uri = spaceHelper.getUri(
         spaceId,
@@ -211,7 +214,7 @@ export const createTreeService = (
         children: await Promise.all(
           dirInfo
             .map((child) => ({
-              ...oldNode.children?.find((c) => c.path == child.path),
+              ...oldNode?.children?.find((c) => c.path == child.path),
               ...child,
             }))
             .map((child) => ({

@@ -276,7 +276,17 @@
     "saveError": "Save failed",
     "edited": "Unsaved changes",
     "saveNow": "Save now",
-    "uriRequired": "URI is required"
+    "uriRequired": "URI is required",
+    "tools": {
+      "noCanvas": "No Draw.io canvas is currently available. Please open a Draw.io file with a canvas and try again.",
+      "emptyCanvas": "The current canvas is empty and cannot be analyzed.",
+      "promptRequired": "prompt cannot be empty.",
+      "analysisFailed": "Error analyzing diagram, please try again.",
+      "generateDiagramDescription": "Generate a new Draw.io diagram based on natural language description and write it to the current canvas. Suitable for creating flowcharts, architecture diagrams, UML diagrams, etc. from scratch.",
+      "generateDiagramPromptDescription": "Description of the diagram you want, for example \"a three-tier Web system architecture diagram with frontend, backend, and database\".",
+      "generateDiagramModeDescription": "append=append elements to the existing diagram, replace=clear the current canvas and keep only the new diagram.",
+      "analyzeDescription": "Analyze the main nodes and connection relationships in the current Draw.io canvas to understand the existing diagram structure. Returns node, edge information and diagram summary."
+    }
   },
   "story": {
     "loadDataFailed": "Failed to Load Data",

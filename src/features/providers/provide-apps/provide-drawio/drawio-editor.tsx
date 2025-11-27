@@ -1,6 +1,7 @@
 import { type DrawioXmlValue, DEFAULT_DRAWIO_XML } from "./drawio-shared";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
 import { FC, useEffect, useRef } from "react";
+import { useDrawioRuntime } from "@/hooks/use-drawio-runtime";
 
 interface DrawioEditorProps {
   initialXml: DrawioXmlValue | null;
@@ -17,15 +18,21 @@ export const DrawioEditor: FC<DrawioEditorProps> = ({
   onSave,
 }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const initialXmlRef = useRef<DrawioXmlValue | null>(
+  const xmlRef = useRef<DrawioXmlValue | null>(
     initialXml || DEFAULT_DRAWIO_XML
   );
 
   useEffect(() => {
-    if (initialXml && !initialXmlRef.current) {
-      initialXmlRef.current = initialXml;
+    if (initialXml) {
+      xmlRef.current = initialXml;
     }
   }, [initialXml]);
+
+  useDrawioRuntime({
+    xmlRef,
+    iframeRef,
+    onChange,
+  });
 
   const memoizedOnChange = useMemoizedFn(onChange);
   const memoizedOnSave = useMemoizedFn(onSave || (() => {}));
@@ -37,9 +44,9 @@ export const DrawioEditor: FC<DrawioEditorProps> = ({
     if (!iframe) return;
 
     if (event.data === "ready") {
-      if (initialXmlRef.current) {
+      if (xmlRef.current) {
         iframe.contentWindow?.postMessage(
-          JSON.stringify({ action: "load", xml: initialXmlRef.current }),
+          JSON.stringify({ action: "load", xml: xmlRef.current }),
           DRAWIO_ORIGIN
         );
       }
@@ -48,16 +55,18 @@ export const DrawioEditor: FC<DrawioEditorProps> = ({
         const data = JSON.parse(event.data);
         if (data.event === "change") {
           if (data.xml) {
+            xmlRef.current = data.xml;
             memoizedOnChange(data.xml);
           }
         } else if (data.event === "save") {
           if (data.xml) {
+            xmlRef.current = data.xml;
             memoizedOnSave(data.xml);
           }
         } else if (data.event === "init") {
-          if (initialXmlRef.current) {
+          if (xmlRef.current) {
             iframe.contentWindow?.postMessage(
-              JSON.stringify({ action: "load", xml: initialXmlRef.current }),
+              JSON.stringify({ action: "load", xml: xmlRef.current }),
               DRAWIO_ORIGIN
             );
           }
@@ -73,8 +82,8 @@ export const DrawioEditor: FC<DrawioEditorProps> = ({
     return () => window.removeEventListener("message", handleMessage);
   }, [handleMessage]);
 
-  const drawioUrl = initialXmlRef.current
-    ? `${DRAWIO_BASE_URL}&xml=${encodeURIComponent(initialXmlRef.current)}`
+  const drawioUrl = xmlRef.current
+    ? `${DRAWIO_BASE_URL}&xml=${encodeURIComponent(xmlRef.current)}`
     : DRAWIO_BASE_URL;
 
   return (
