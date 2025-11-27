@@ -9,6 +9,9 @@ export const TreeEventKeys = {
   CopyFilePath: typedKey<{
     node: TreeDataNode<FolderTreeNode>;
   }>("copyFilePath"),
+  DownloadFile: typedKey<{
+    node: TreeDataNode<FolderTreeNode>;
+  }>("downloadFile"),
   NodeClick: typedKey<{
     node: TreeDataNode<FolderTreeNode>;
     event?: React.MouseEvent<HTMLDivElement>;
